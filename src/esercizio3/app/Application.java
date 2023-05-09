@@ -35,9 +35,9 @@ public class Application {
 
 		System.out.println("La persona cercata è " + searched.getNome());
 
-		String numerocCercato = cercaNumeroContatto(rubrica, contatto3.getNome());
+		String numeroCercato = cercaNumeroContatto(rubrica, contatto3.getNome());
 
-		System.out.println("Il numero cercato è " + numerocCercato);
+		System.out.println("Il numero cercato è " + numeroCercato);
 
 		stampaContattiRubrica(rubrica);
 
