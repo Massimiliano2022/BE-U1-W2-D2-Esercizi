@@ -1,6 +1,8 @@
 package esercizio1.app;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
@@ -10,6 +12,8 @@ public class Application {
 		int i = 0;
 
 		HashSet<String> listaParole = new HashSet<String>();
+
+		List<String> paroleDuplicate = new ArrayList<String>();
 
 		int numeroElementi;
 
@@ -22,16 +26,19 @@ public class Application {
 
 		} while (numeroElementi <= 0);
 
-		inserisciParole(numeroElementi, scanner, i, listaParole);
+		inserisciParole(numeroElementi, scanner, i, listaParole, paroleDuplicate);
 
-		stampoParoleDuplicate(listaParole);
+		stampoParoleDuplicate(paroleDuplicate);
 
 		stampoNumeroParole(listaParole);
 
 		stampoListaParole(listaParole);
 	}
 
-	private static void inserisciParole(int numeroElementi, Scanner scanner, int i, HashSet<String> listaParole) {
+	private static void inserisciParole(int numeroElementi, Scanner scanner, int i, HashSet<String> listaParole,
+			List<String> paroleDuplicate) {
+
+		scanner.nextLine();
 
 		while (i < numeroElementi) {
 
@@ -42,8 +49,11 @@ public class Application {
 			parola = scanner.nextLine();
 
 			if (parola != "") {
-
-				listaParole.add(parola);
+				if (listaParole.contains(parola)) {
+					paroleDuplicate.add(parola);
+				} else {
+					listaParole.add(parola);
+				}
 				i++;
 			}
 
@@ -51,10 +61,14 @@ public class Application {
 		scanner.close();
 	}
 
-	private static void stampoParoleDuplicate(HashSet<String> listaParole) {
+	private static void stampoParoleDuplicate(List<String> paroleDuplicate) {
 
-		System.out.println("L'hashSet non permette l'inserimento di elementi uguali.");
-
+		if (paroleDuplicate.size() > 0) {
+			System.out.println("Parole duplicate :");
+			for (String parola : paroleDuplicate) {
+				System.out.println(parola);
+			}
+		}
 	}
 
 	private static void stampoNumeroParole(HashSet<String> listaParole) {
@@ -67,8 +81,8 @@ public class Application {
 
 		System.out.println("Stampo tutte le parole inserite:");
 
-		for (String word : listaParole) {
-			System.out.println(word);
+		for (String parola : listaParole) {
+			System.out.println(parola);
 		}
 
 	}
