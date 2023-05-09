@@ -29,13 +29,13 @@ public class Application {
 
 		aggiungiContatti(rubrica, listaPersone);
 
-		cancellaContatto(rubrica, contatto2.getNome());
+		cancellaContatto(rubrica, contatto5.getNome());
 
-		Persona searched = ricercaContatto(rubrica, contatto5.getNumeroTelefono());
+		String nomeContattoCercato = ricercaContatto(rubrica, contatto2.getNumeroTelefono());
 
-		System.out.println("La persona cercata è " + searched.getNome());
+		System.out.println("La persona cercata è " + nomeContattoCercato);
 
-		String numeroCercato = cercaNumeroContatto(rubrica, contatto3.getNome());
+		String numeroCercato = cercaNumeroContatto(rubrica, contatto4.getNome());
 
 		System.out.println("Il numero cercato è " + numeroCercato);
 
@@ -67,27 +67,21 @@ public class Application {
 		}
 	}
 
-	private static Persona ricercaContatto(Map<String, String> rubrica, String numeroTelefono) {
-		Persona contatto = null;
+	private static String ricercaContatto(Map<String, String> rubrica, String numeroTelefono) {
+
+		String nomeCercato = null;
 
 		Iterator<Entry<String, String>> i = rubrica.entrySet().iterator();
 
 		while (i.hasNext()) {
 
-			Entry<String, String> entry = i.next();
-			String nome = entry.getKey();
-			String numeroContatto = entry.getValue();
-			Persona personaCorrente = new Persona(nome, numeroContatto);
+			Map.Entry<String, String> entry = i.next();
 
-			if (personaCorrente.getNumeroTelefono() == numeroTelefono) {
-
-				contatto = personaCorrente;
-
+			if (numeroTelefono.equals(entry.getValue())) {
+				nomeCercato = entry.getKey();
 			}
-
 		}
-
-		return contatto;
+		return nomeCercato;
 	}
 
 	private static String cercaNumeroContatto(Map<String, String> rubrica, String nomeContatto) {
@@ -98,14 +92,11 @@ public class Application {
 
 		while (i.hasNext()) {
 
-			Entry<String, String> entry = i.next();
-			String nome = entry.getKey();
-			String numeroTelefono = entry.getValue();
-			Persona personaCorrente = new Persona(nome, numeroTelefono);
+			Map.Entry<String, String> entry = i.next();
 
-			if (personaCorrente.getNome() == nomeContatto) {
+			if (nomeContatto.equals(entry.getKey())) {
 
-				numeroCercato = personaCorrente.getNumeroTelefono();
+				numeroCercato = entry.getValue();
 			}
 
 		}
